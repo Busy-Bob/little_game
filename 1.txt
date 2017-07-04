@@ -1,0 +1,16 @@
+FD
+12
+//CMD_DISPLAYOFF
+AE
+//CMD_CLEARWINDOW,增加设置
+A0
+00
+//
+25
+00
+00
+5F
+3F
+//略去delay5
+AF
+

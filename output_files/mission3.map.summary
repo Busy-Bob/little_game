@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Tue Jul 04 15:07:02 2017
+Quartus II 64-Bit Version : 13.0.0 Build 156 04/24/2013 SJ Full Version
+Revision Name : mission3
+Top-level Entity Name : mission3
+Family : Cyclone II
+Total logic elements : 268
+    Total combinational functions : 267
+    Dedicated logic registers : 124
+Total registers : 124
+Total pins : 9
+Total virtual pins : 0
+Total memory bits : 49,152
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

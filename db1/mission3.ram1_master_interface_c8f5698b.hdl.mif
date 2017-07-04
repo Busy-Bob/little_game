@@ -1,0 +1,17 @@
+-- begin_signature
+-- master_interface
+-- end_signature
+WIDTH=8;
+DEPTH=6;
+
+ADDRESS_RADIX=UNS;
+DATA_RADIX=BIN;
+
+CONTENT BEGIN
+	5 :	00111111;
+	4 :	00000000;
+	3 :	01110101;
+	2 :	01011111;
+	1 :	00000000;
+	0 :	00010101;
+END;
