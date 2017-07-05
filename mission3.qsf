@@ -76,7 +76,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C5Q208C8
-set_global_assignment -name TOP_LEVEL_ENTITY mission3
+set_global_assignment -name TOP_LEVEL_ENTITY master_interface
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "23:08:00  JULY 02, 2017"
 set_global_assignment -name LAST_QUARTUS_VERSION 13.0

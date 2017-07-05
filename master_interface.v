@@ -22,7 +22,11 @@
 // 										  Define Module
 // ==============================================================================
 module master_interface(
+		game_data,
+		game_end,
+		data_update,
 		p,
+		p2,
 		begin_transmission,
 //		recieved_data,
 		end_transmission,
@@ -35,7 +39,8 @@ module master_interface(
 		slave_select, //CS
 		send_data, 
 		DC,//DC
-		address
+		address,
+		address2
 //		temp_data, //用于储存temp过程中的data
 //		x_axis_data,
 //		y_axis_data,
@@ -46,13 +51,18 @@ module master_interface(
 // 									   Port Declarations
 // ==============================================================================
 			output [12:0]    address;
+			output [9:0]		address2;
 			output           begin_transmission;
 //			input [7:0]      recieved_data;
 			input            end_transmission;
 			input            clk;
 //			input            rst;
 			input            start;
-			input [7:0]     p;
+			input [7:0]     	p;
+			input [7:0]			p2;
+			input [22:0]		game_data;
+			input 				game_end;
+			input 				data_update;
 	
 			output			  RES;
 			output			  VCCEN;
@@ -76,6 +86,7 @@ module master_interface(
 			reg			     PMODEN;	
 			reg              DC;
 			reg [12:0]       address;
+			reg [9:0]		address2;
 //			reg [7:0]        temp_data;
 //			reg [15:0]       x_axis_data;
 //			reg [15:0]       y_axis_data;
@@ -87,10 +98,26 @@ module master_interface(
 								  StateTYPE_run = 2,
 								  StateTYPE_hold = 3,
 								  StateTYPE_wait_ss = 4,
-								  StateTYPE_wait_run = 5;
+								  StateTYPE_wait_run = 5,
+								  StateTYPE_redraw = 6;
 			reg [2:0]        STATE;
 			reg [2:0]        previousSTATE;
-   
+//			reg [7:0]		  Z0[100:0];
+//			reg [7:0]		  Z3[100:0];
+//			reg [7:0]		  Z6[100:0];
+// 			reg [7:0]		  Z9[100:0];
+//			reg [7:0]		  Z12[100:0];
+//			reg [7:0]		  Z15[100:0];
+//			reg [7:0]		  C18[100:0];
+//			reg [7:0]		  C19[100:0];
+//			reg [7:0]		  C20[100:0];
+//			reg [7:0]		  C21[100:0];
+//			reg [7:0]		  C22[100:0];
+			reg [7:0]		  location[200:0];		
+			reg show_flag;
+			reg [7:0]     		now_draw = 0;
+			reg [9:0] 			previousaddress; //用于储存address2
+
 			// setup control register 1 to enable x, y, and z. CTRL_REG1 (0x20)
 			// with read and multiple bytes not selected
 			// output data rate of 100 Hz
@@ -104,7 +131,9 @@ module master_interface(
 			//parameter [7:0]  TEMP_READ_BEGIN = 8'hA6;
 			
 			//parameter        MAX_BYTE_COUNT = 6;
-			reg [4:0]        byte_count;
+			reg [4:0]        byte_count = 0;
+			reg [4:0]			row_add = 0;
+//			reg [9:0]			now_row_p2 = 0;
 			
 			parameter [31:0] SS_COUNT_MAX = 32'd25000000;
 			reg [31:0]       ss_count;
@@ -117,6 +146,19 @@ module master_interface(
 			begin
 				$readmemh("1.txt",SETUP_GYRO);
 				$readmemh("2.txt",RUN_BEGIN);
+				$readmemh("location.txt",location);
+//				$readmemh("Z0.txt",Z0);
+//				$readmemh("Z3.txt",Z3);
+//				$readmemh("Z6.txt",Z6);
+//				$readmemh("Z9.txt",Z9);
+//				$readmemh("Z12.txt",Z12);
+//				$readmemh("Z15.txt",Z15);
+//				
+//				$readmemh("C18.txt",C18);
+//				$readmemh("C19.txt",C19);
+//				$readmemh("C20.txt",C20);
+//				$readmemh("C21.txt",C21);
+//				$readmemh("C22.txt",C22);
 			end
    
 // ==============================================================================
@@ -198,12 +240,15 @@ module master_interface(
 											previousSTATE <= StateTYPE_setup;
 											
 										end
-									else
+									else // 初始化地方
 										begin
 											byte_count <= 0;
+											now_draw <= 0;
 											previousSTATE <= StateTYPE_setup;
 											address = 0;
-											STATE <= StateTYPE_wait_run;
+											STATE <= StateTYPE_run;
+											show_flag <= 0;
+//											now_row_p2 <= 0;
 										end
 							end
 							// temp
@@ -286,31 +331,135 @@ module master_interface(
 //										address = 0;
 //									end
 //								end
-//								
-								previousSTATE <= StateTYPE_run;
-								begin_transmission <= 1'b1;
-								STATE <= StateTYPE_hold;
-								slave_select <= 1'b0;
-								if(byte_count < 5'd6)
-								begin
-									DC = 0;
-									send_data = RUN_BEGIN[byte_count];
-									byte_count <= byte_count + 1'b1;
-								end
-								else
-								begin
-									DC = 1;
-									send_data <= p[7:0];
-									byte_count <= byte_count;
-									address = address + 1'b1;
-									if(address == 13'd6144)
+								if(!show_flag)
 									begin
-										STATE <= StateTYPE_wait_run;
-										address = 0;
+										previousSTATE <= StateTYPE_run;
+										begin_transmission <= 1'b1;
+										STATE <= StateTYPE_hold;
+										slave_select <= 1'b0;
+										if(byte_count < 5'd6)
+										begin
+											DC <= 0;
+											send_data <= RUN_BEGIN[byte_count];
+											byte_count <= byte_count + 1'b1;
+										end
+										else
+										begin
+											DC <= 1;
+											send_data <= p[7:0];
+											byte_count <= byte_count;
+											address <= address + 1'b1;
+											if(address == 13'd6144)
+											begin
+												STATE <= StateTYPE_run;
+												address <= 0;
+												show_flag <= 1;
+												slave_select <= 1'b1;
+												byte_count <= 0;
+											end
+										end
 									end
-								end
+								else if(data_update)  //初始化地方
+									begin
+										previousSTATE <= StateTYPE_run;
+										STATE <= StateTYPE_redraw;
+										address <= location[4] * 13'd96 + location[1];
+										address2 <= 0;
+										byte_count <= 0;
+										row_add <= 0;
+										now_draw <= 0;
+//										now_row_p2 <= 0;
+									end
 								
 							end
+							
+							StateTYPE_redraw:  // 每个地方都要处理address
+								begin
+									if(game_end)
+										begin
+										
+										end
+									else if(now_draw == 8'h23)
+										begin
+											STATE <= StateTYPE_run;
+											now_draw <= 0;
+										end
+										
+									else		
+										begin
+											if(game_data[now_draw])
+												begin
+													address <= location[4+(now_draw+1)*6] * 13'd96 + location[1+(now_draw+1)*6]; //为了使得下次可以直接运算，不用等待
+													previousSTATE <= StateTYPE_redraw;
+													begin_transmission <= 1'b1;
+													STATE <= StateTYPE_hold;
+													slave_select <= 1'b0;
+													if(byte_count < 5'd6)
+													begin
+														DC = 0;
+														send_data <= location[byte_count+6*now_draw];
+														byte_count <= byte_count + 1'b1;
+														//增加一个赋值给previousaddress的
+														previousaddress <= address2;
+													end
+													else
+													begin
+														DC = 1;
+														send_data <= p2[7:0];
+														byte_count <= byte_count;
+														address2 <= address2 + 1'b1;
+														if(address2 - previousaddress == (location[6*now_draw+2]-location[6*now_draw+1]+1)*(location[6*now_draw+5]-location[6*now_draw+4]+1))
+														begin
+															now_draw <= now_draw + 1;
+															byte_count <= 0;
+															STATE <= StateTYPE_redraw;
+															address2 <= address2;
+															slave_select <= 1'b1;
+														end
+													end
+												end
+											else
+												begin
+													address2 <= address2 + (location[6*now_draw+2]-location[6*now_draw+1]+1)*(location[6*now_draw+5]-location[6*now_draw+4]+1); 
+													previousSTATE <= StateTYPE_redraw;
+													begin_transmission <= 1'b1;
+													STATE <= StateTYPE_hold;
+													slave_select <= 1'b0;
+													if(byte_count < 5'd6)
+													begin
+														DC = 0;
+														send_data <= location[byte_count+6*now_draw];
+														byte_count <= byte_count + 1'b1;
+													end
+													else
+													begin
+														DC = 1;
+														send_data <= p[7:0];
+														byte_count <= byte_count;
+														if(address < (location[4+now_draw*6]+row_add)*13'd96 + location[2+now_draw*6])
+															address <= address + 1'b1;
+														else
+															begin
+																address <= address + 13'd96 - {{5'b0},location[2+now_draw*6]} + {{5'b0},location[1+now_draw*6]};
+																row_add <= row_add + 1'b1;
+															end
+														if(row_add > location[5+now_draw*6] - location[4+now_draw*6])
+														begin
+															now_draw <= now_draw + 1;
+															byte_count <= 0;
+															STATE <= StateTYPE_redraw;
+															address <= location[4+(now_draw+1)*6] * 13'd96 + location[1+(now_draw+1)*6];
+															slave_select <= 1'b1;
+														end
+													end
+												end
+										end
+								
+								
+								
+								
+								end
+							
 							
 							// hold
 							StateTYPE_hold :
@@ -351,7 +500,7 @@ module master_interface(
 								end
 
 							// wait_run
-							StateTYPE_wait_run :
+/*							StateTYPE_wait_run :
 								begin
 									byte_count = 0;
 									begin_transmission <= 1'b0;
@@ -369,6 +518,7 @@ module master_interface(
 									else
 										count_wait <= count_wait + 1'b1;
 								end
+								*/
 						endcase
 				end
 			end

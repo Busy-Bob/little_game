@@ -1,0 +1,32 @@
+-- begin_signature
+-- master_interface(StateTYPE_idle
+-- 3'b000
+-- StateTYPE_setup
+-- 3'b001
+-- StateTYPE_run
+-- 3'b010
+-- StateTYPE_hold
+-- 3'b011
+-- StateTYPE_wait_ss
+-- 3'b100
+-- StateTYPE_wait_run
+-- 3'b101
+-- SS_COUNT_MAX
+-- 32'b00000001011111010111100001000000
+-- COUNT_WAIT_MAX
+-- 32'b00000001011111010111100001000000)
+-- end_signature
+WIDTH=8;
+DEPTH=6;
+
+ADDRESS_RADIX=UNS;
+DATA_RADIX=BIN;
+
+CONTENT BEGIN
+	5 :	00111111;
+	4 :	00000000;
+	3 :	01110101;
+	2 :	01011111;
+	1 :	00000000;
+	0 :	00010101;
+END;

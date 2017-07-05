@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="mission3">
-		<CBX_INST_ENTRY INSTANCE_NAME="|mission3|rom256:inst3|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_ds71.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

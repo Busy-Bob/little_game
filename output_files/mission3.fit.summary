@@ -1,12 +1,12 @@
-Fitter Status : Successful - Tue Jul 04 15:07:19 2017
+Fitter Status : Successful - Tue Jul 04 15:56:56 2017
 Quartus II 64-Bit Version : 13.0.0 Build 156 04/24/2013 SJ Full Version
 Revision Name : mission3
 Top-level Entity Name : mission3
 Family : Cyclone II
 Device : EP2C5Q208C8
 Timing Models : Final
-Total logic elements : 267 / 4,608 ( 6 % )
-    Total combinational functions : 267 / 4,608 ( 6 % )
+Total logic elements : 269 / 4,608 ( 6 % )
+    Total combinational functions : 268 / 4,608 ( 6 % )
     Dedicated logic registers : 124 / 4,608 ( 3 % )
 Total registers : 124
 Total pins : 9 / 142 ( 6 % )

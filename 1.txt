@@ -4,7 +4,7 @@ FD
 AE
 //CMD_CLEARWINDOW,‘ˆº”…Ë÷√
 A0
-00
+30
 //
 25
 00

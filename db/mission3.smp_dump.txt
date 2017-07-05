@@ -1,20 +1,15 @@
 
-State Machine - |mission3|spi_interface:inst|RxTxSTATE
-Name RxTxSTATE.RxTxTYPE_idle RxTxSTATE.RxTxTYPE_hold RxTxSTATE.RxTxTYPE_rx_tx 
-RxTxSTATE.RxTxTYPE_idle 0 0 0 
-RxTxSTATE.RxTxTYPE_rx_tx 1 0 1 
-RxTxSTATE.RxTxTYPE_hold 1 1 0 
+State Machine - |master_interface|previousSTATE
+Name previousSTATE.StateTYPE_run previousSTATE.StateTYPE_redraw previousSTATE.StateTYPE_setup 
+previousSTATE.StateTYPE_setup 0 0 0 
+previousSTATE.StateTYPE_run 1 0 1 
+previousSTATE.StateTYPE_redraw 0 1 1 
 
-State Machine - |mission3|master_interface:inst4|previousSTATE
-Name previousSTATE.StateTYPE_run 
-previousSTATE.StateTYPE_setup 0 
-previousSTATE.StateTYPE_run 1 
-
-State Machine - |mission3|master_interface:inst4|STATE
-Name STATE.StateTYPE_wait_run STATE.StateTYPE_wait_ss STATE.StateTYPE_hold STATE.StateTYPE_run STATE.StateTYPE_setup STATE.StateTYPE_idle 
+State Machine - |master_interface|STATE
+Name STATE.StateTYPE_redraw STATE.StateTYPE_wait_ss STATE.StateTYPE_hold STATE.StateTYPE_run STATE.StateTYPE_setup STATE.StateTYPE_idle 
 STATE.StateTYPE_idle 0 0 0 0 0 0 
 STATE.StateTYPE_setup 0 0 0 0 1 1 
 STATE.StateTYPE_run 0 0 0 1 0 1 
 STATE.StateTYPE_hold 0 0 1 0 0 1 
 STATE.StateTYPE_wait_ss 0 1 0 0 0 1 
-STATE.StateTYPE_wait_run 1 0 0 0 0 1 
+STATE.StateTYPE_redraw 1 0 0 0 0 1 
