@@ -1,5 +1,8 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="mission3">
+		<CBX_INST_ENTRY INSTANCE_NAME="|mission3|master_interface:inst4|lpm_mult:Mult0" CBX_FILE_NAME="mult_31t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|mission3|rom256:inst3|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_ds71.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|mission3|rom_things:inst1|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_3s71.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

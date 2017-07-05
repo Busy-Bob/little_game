@@ -26,7 +26,7 @@ module master_interface(
 		game_end,
 		data_update,
 		p,
-		p2,
+		p_another,
 		begin_transmission,
 //		recieved_data,
 		end_transmission,
@@ -40,7 +40,7 @@ module master_interface(
 		send_data, 
 		DC,//DC
 		address,
-		address2
+		car_address
 //		temp_data, //用于储存temp过程中的data
 //		x_axis_data,
 //		y_axis_data,
@@ -51,7 +51,7 @@ module master_interface(
 // 									   Port Declarations
 // ==============================================================================
 			output [12:0]    address;
-			output [9:0]		address2;
+			output [9:0]		car_address;
 			output           begin_transmission;
 //			input [7:0]      recieved_data;
 			input            end_transmission;
@@ -59,7 +59,7 @@ module master_interface(
 //			input            rst;
 			input            start;
 			input [7:0]     	p;
-			input [7:0]			p2;
+			input [7:0]			p_another;
 			input [22:0]		game_data;
 			input 				game_end;
 			input 				data_update;
@@ -86,7 +86,7 @@ module master_interface(
 			reg			     PMODEN;	
 			reg              DC;
 			reg [12:0]       address;
-			reg [9:0]		address2;
+			reg [9:0]		car_address;
 //			reg [7:0]        temp_data;
 //			reg [15:0]       x_axis_data;
 //			reg [15:0]       y_axis_data;
@@ -98,8 +98,9 @@ module master_interface(
 								  StateTYPE_run = 2,
 								  StateTYPE_hold = 3,
 								  StateTYPE_wait_ss = 4,
-								  StateTYPE_wait_run = 5,
-								  StateTYPE_redraw = 6;
+//								  StateTYPE_wait_run = 5,
+								  StateTYPE_redraw = 6,
+								  StateTYPE_end = 5;
 			reg [2:0]        STATE;
 			reg [2:0]        previousSTATE;
 //			reg [7:0]		  Z0[100:0];
@@ -113,10 +114,10 @@ module master_interface(
 //			reg [7:0]		  C20[100:0];
 //			reg [7:0]		  C21[100:0];
 //			reg [7:0]		  C22[100:0];
-			reg [7:0]		  location[200:0];		
+					
 			reg show_flag;
 			reg [7:0]     		now_draw = 0;
-			reg [9:0] 			previousaddress; //用于储存address2
+			reg [9:0] 			previousaddress; //用于储存car_address
 
 			// setup control register 1 to enable x, y, and z. CTRL_REG1 (0x20)
 			// with read and multiple bytes not selected
@@ -124,6 +125,7 @@ module master_interface(
 			// will output 8.75 mdps/digit at 250 dps maximum
 			// ?????设置内容？
 			reg [7:0] SETUP_GYRO [50:0];
+			reg [7:0] LOCATION [137:0];  //必须要设置和文件一模一样大小
 			reg [7:0] RUN_BEGIN [5:0];
 			// address of X_AXIS (0x28) with read and multiple bytes selected (0xC0)
 			//parameter [7:0]  DATA_READ_BEGIN = 8'hE8;
@@ -131,11 +133,11 @@ module master_interface(
 			//parameter [7:0]  TEMP_READ_BEGIN = 8'hA6;
 			
 			//parameter        MAX_BYTE_COUNT = 6;
-			reg [4:0]        byte_count = 0;
+			reg [7:0]        byte_count = 0;
 			reg [4:0]			row_add = 0;
-//			reg [9:0]			now_row_p2 = 0;
+//			reg [9:0]			now_row_p_another = 0;
 			
-			parameter [31:0] SS_COUNT_MAX = 32'd25000000;
+			parameter [31:0] SS_COUNT_MAX = 32'd2000000;
 			reg [31:0]       ss_count;
 			
 			parameter [31:0] COUNT_WAIT_MAX = 32'd25000000;		//X"000FFF";
@@ -146,7 +148,7 @@ module master_interface(
 			begin
 				$readmemh("1.txt",SETUP_GYRO);
 				$readmemh("2.txt",RUN_BEGIN);
-				$readmemh("location.txt",location);
+				$readmemh("3.txt",LOCATION);
 //				$readmemh("Z0.txt",Z0);
 //				$readmemh("Z3.txt",Z3);
 //				$readmemh("Z6.txt",Z6);
@@ -200,7 +202,7 @@ module master_interface(
 							
 							// setup
 							StateTYPE_setup :begin
-									if (byte_count < 11+4)
+									if (byte_count < 45+4)
 										begin
 											if(byte_count == 0) begin
 													DC = 1'b0;
@@ -210,17 +212,17 @@ module master_interface(
 													slave_select <= 1'b1;
 													STATE <= StateTYPE_wait_ss;
 												end
-											else if(byte_count == 5'b1) begin
+											else if(byte_count == 8'b1) begin
 														RES = 0;
 														slave_select <= 1'b1;
 														STATE <= StateTYPE_wait_ss;
 												end
-											else if(byte_count == 5'd2) begin
+											else if(byte_count == 8'd2) begin
 														RES = 1;
 														slave_select <= 1'b1;
 														STATE <= STATE;
 												end
-											else if(byte_count == 5'd13) begin
+											else if(byte_count == 8'd37) begin
 														VCCEN = 1;
 														slave_select <= 1'b1;
 														STATE <= StateTYPE_wait_ss;
@@ -229,7 +231,7 @@ module master_interface(
 												begin
 													slave_select <= 1'b0;
 													begin_transmission <= 1'b1;
-													if(byte_count > 5'd13)
+													if(byte_count > 8'd37)
 														send_data <= SETUP_GYRO[byte_count-4];
 													else
 														send_data <= SETUP_GYRO[byte_count-3];
@@ -248,7 +250,7 @@ module master_interface(
 											address = 0;
 											STATE <= StateTYPE_run;
 											show_flag <= 0;
-//											now_row_p2 <= 0;
+//											now_row_p_another <= 0;
 										end
 							end
 							// temp
@@ -337,7 +339,7 @@ module master_interface(
 										begin_transmission <= 1'b1;
 										STATE <= StateTYPE_hold;
 										slave_select <= 1'b0;
-										if(byte_count < 5'd6)
+										if(byte_count < 8'd6)
 										begin
 											DC <= 0;
 											send_data <= RUN_BEGIN[byte_count];
@@ -363,14 +365,15 @@ module master_interface(
 									begin
 										previousSTATE <= StateTYPE_run;
 										STATE <= StateTYPE_redraw;
-										address <= location[4] * 13'd96 + location[1];
-										address2 <= 0;
+										address <= LOCATION[4] * 13'd96 + LOCATION[1];
+										car_address <= 0;
 										byte_count <= 0;
 										row_add <= 0;
 										now_draw <= 0;
-//										now_row_p2 <= 0;
+//										now_row_p_another <= 0;
 									end
-								
+								if(!start)
+										STATE <= StateTYPE_end;
 							end
 							
 							StateTYPE_redraw:  // 每个地方都要处理address
@@ -379,7 +382,7 @@ module master_interface(
 										begin
 										
 										end
-									else if(now_draw == 8'h23)
+									else if(now_draw == 8'd23)
 										begin
 											STATE <= StateTYPE_run;
 											now_draw <= 0;
@@ -389,46 +392,53 @@ module master_interface(
 										begin
 											if(game_data[now_draw])
 												begin
-													address <= location[4+(now_draw+1)*6] * 13'd96 + location[1+(now_draw+1)*6]; //为了使得下次可以直接运算，不用等待
+													address <= LOCATION[4+(now_draw+1)*6] * 13'd96 + LOCATION[1+(now_draw+1)*6]; //为了使得下次可以直接运算，不用等待
 													previousSTATE <= StateTYPE_redraw;
 													begin_transmission <= 1'b1;
 													STATE <= StateTYPE_hold;
 													slave_select <= 1'b0;
-													if(byte_count < 5'd6)
+													if(byte_count < 8'd6)
 													begin
 														DC = 0;
-														send_data <= location[byte_count+6*now_draw];
+														send_data <= LOCATION[byte_count+6*now_draw];
 														byte_count <= byte_count + 1'b1;
 														//增加一个赋值给previousaddress的
-														previousaddress <= address2;
+														previousaddress <= car_address;
 													end
 													else
 													begin
 														DC = 1;
-														send_data <= p2[7:0];
+														send_data <= p_another[7:0];
 														byte_count <= byte_count;
-														address2 <= address2 + 1'b1;
-														if(address2 - previousaddress == (location[6*now_draw+2]-location[6*now_draw+1]+1)*(location[6*now_draw+5]-location[6*now_draw+4]+1))
+														car_address <= car_address + 1'b1;
+														if(car_address - previousaddress >= (LOCATION[6*now_draw+2]-LOCATION[6*now_draw+1]+1)*(LOCATION[6*now_draw+5]-LOCATION[6*now_draw+4]+1))
 														begin
 															now_draw <= now_draw + 1;
 															byte_count <= 0;
 															STATE <= StateTYPE_redraw;
-															address2 <= address2;
+															car_address <= car_address;
 															slave_select <= 1'b1;
+															begin_transmission <= 1'b0;
 														end
 													end
 												end
 											else
 												begin
-													address2 <= address2 + (location[6*now_draw+2]-location[6*now_draw+1]+1)*(location[6*now_draw+5]-location[6*now_draw+4]+1); 
 													previousSTATE <= StateTYPE_redraw;
 													begin_transmission <= 1'b1;
 													STATE <= StateTYPE_hold;
 													slave_select <= 1'b0;
-													if(byte_count < 5'd6)
+													if(byte_count == 8'd0)
 													begin
 														DC = 0;
-														send_data <= location[byte_count+6*now_draw];
+														send_data <= LOCATION[byte_count+6*now_draw];
+														byte_count <= byte_count + 1'b1;
+														car_address <= car_address + (LOCATION[6*now_draw+2]-LOCATION[6*now_draw+1]+1)*(LOCATION[6*now_draw+5]-LOCATION[6*now_draw+4]+1); 
+													end
+													else if(byte_count < 8'd6)
+													begin
+														DC = 0;
+														send_data <= LOCATION[byte_count+6*now_draw];
 														byte_count <= byte_count + 1'b1;
 													end
 													else
@@ -436,25 +446,29 @@ module master_interface(
 														DC = 1;
 														send_data <= p[7:0];
 														byte_count <= byte_count;
-														if(address < (location[4+now_draw*6]+row_add)*13'd96 + location[2+now_draw*6])
+														if(address < (LOCATION[4+now_draw*6]+row_add)*13'd96 + LOCATION[2+now_draw*6])
 															address <= address + 1'b1;
 														else
 															begin
-																address <= address + 13'd96 - {{5'b0},location[2+now_draw*6]} + {{5'b0},location[1+now_draw*6]};
+																address <= address + 13'd96 - {{5'b0},LOCATION[2+now_draw*6]} + {{5'b0},LOCATION[1+now_draw*6]};
 																row_add <= row_add + 1'b1;
 															end
-														if(row_add > location[5+now_draw*6] - location[4+now_draw*6])
+														if(row_add > LOCATION[5+now_draw*6] - LOCATION[4+now_draw*6])
 														begin
 															now_draw <= now_draw + 1;
 															byte_count <= 0;
 															STATE <= StateTYPE_redraw;
-															address <= location[4+(now_draw+1)*6] * 13'd96 + location[1+(now_draw+1)*6];
+															address <= LOCATION[4+(now_draw+1)*6] * 13'd96 + LOCATION[1+(now_draw+1)*6];
 															slave_select <= 1'b1;
+															begin_transmission <= 1'b0;
+															row_add <= 0; 
 														end
 													end
 												end
 										end
-								
+										
+									if(!start)
+										STATE <= StateTYPE_end;
 								
 								
 								
@@ -519,6 +533,23 @@ module master_interface(
 										count_wait <= count_wait + 1'b1;
 								end
 								*/
+							StateTYPE_end: 
+								begin
+									if(show_flag)
+										begin
+											DC = 1'b0;
+											slave_select <= 1'b0;
+											begin_transmission <= 1'b1;
+											send_data <= 8'hAE;
+											show_flag <= 0;
+										end
+									else	
+										begin
+											VCCEN = 0;
+											STATE = StateTYPE_idle;
+										end
+								
+								end
 						endcase
 				end
 			end

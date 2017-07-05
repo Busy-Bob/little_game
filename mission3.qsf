@@ -76,7 +76,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C5Q208C8
-set_global_assignment -name TOP_LEVEL_ENTITY master_interface
+set_global_assignment -name TOP_LEVEL_ENTITY mission3
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "23:08:00  JULY 02, 2017"
 set_global_assignment -name LAST_QUARTUS_VERSION 13.0
@@ -97,7 +97,6 @@ set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "500 ns" -section_id ha
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME ha_vlg_tst -section_id ha
 set_global_assignment -name EDA_TEST_BENCH_FILE simulation/modelsim/ha.vt -section_id ha
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
-set_location_assignment PIN_132 -to _clk
 set_location_assignment PIN_81 -to _mosi
 set_location_assignment PIN_57 -to _start
 set_location_assignment PIN_102 -to SCLK
@@ -108,12 +107,52 @@ set_location_assignment PIN_89 -to vccen
 set_location_assignment PIN_87 -to pmoden
 set_global_assignment -name USE_CONFIGURATION_DEVICE ON
 set_global_assignment -name STRATIX_CONFIGURATION_DEVICE EPCS4
+set_location_assignment PIN_132 -to clk
+set_location_assignment PIN_115 -to h1
+set_location_assignment PIN_48 -to rst
+set_location_assignment PIN_149 -to seg_sel[3]
+set_location_assignment PIN_147 -to seg_sel[2]
+set_location_assignment PIN_146 -to seg_sel[1]
+set_location_assignment PIN_145 -to seg_sel[0]
+set_location_assignment PIN_164 -to SM[7]
+set_location_assignment PIN_162 -to SM[6]
+set_location_assignment PIN_151 -to SM[5]
+set_location_assignment PIN_160 -to SM[4]
+set_location_assignment PIN_161 -to SM[3]
+set_location_assignment PIN_163 -to SM[2]
+set_location_assignment PIN_150 -to SM[1]
+set_location_assignment PIN_152 -to SM[0]
+set_location_assignment PIN_67 -to speed
+set_location_assignment PIN_114 -to v1
+set_location_assignment PIN_113 -to v2
+set_location_assignment PIN_112 -to v3
+set_location_assignment PIN_110 -to v4
+set_location_assignment PIN_144 -to wudidis[6]
+set_location_assignment PIN_143 -to wudidis[5]
+set_location_assignment PIN_142 -to wudidis[4]
+set_location_assignment PIN_141 -to wudidis[3]
+set_location_assignment PIN_139 -to wudidis[2]
+set_location_assignment PIN_138 -to wudidis[1]
+set_location_assignment PIN_137 -to wudidis[0]
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VERILOG_FILE gravity_sensor_out.v
+set_global_assignment -name VERILOG_FILE gravity_sensor_in.v
+set_global_assignment -name VERILOG_FILE clk_div.v
+set_global_assignment -name VERILOG_FILE score.v
+set_global_assignment -name VERILOG_FILE keyboard.v
+set_global_assignment -name VERILOG_FILE game_ctrl.v
+set_global_assignment -name BDF_FILE game.bdf
+set_global_assignment -name VERILOG_FILE barrier_data.v
 set_global_assignment -name VERILOG_FILE rom256.v
 set_global_assignment -name BDF_FILE mission3.bdf
 set_global_assignment -name VERILOG_FILE spi_interface.v
 set_global_assignment -name VERILOG_FILE master_interface.v
 set_global_assignment -name QIP_FILE rom256.qip
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name QIP_FILE rom_things.qip
+set_location_assignment PIN_101 -to miso
+set_location_assignment PIN_107 -to mosi
+set_location_assignment PIN_105 -to cs
+set_location_assignment PIN_97 -to sclk2
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
