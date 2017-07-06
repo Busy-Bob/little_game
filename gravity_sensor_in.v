@@ -1,7 +1,8 @@
 module gravity_sensor_in (
 	input clkcs, sclk, data, clk1,
 	output reg [1:0] car_move,
-	output reg speed
+	output reg speed,
+	output [2:0] random_data
 );
 
 reg [11:0] xvalue, yvalue;
@@ -134,5 +135,7 @@ always @(posedge clk1) begin
 	
 
 end
+
+assign random_data = yvalue[2:0];
 
 endmodule

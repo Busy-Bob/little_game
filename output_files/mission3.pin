@@ -130,7 +130,7 @@ GND*                         : 63        :        :                   :         
 GND*                         : 64        :        :                   :         : 4         :                
 GND                          : 65        : gnd    :                   :         :           :                
 VCCINT                       : 66        : power  :                   : 1.2V    :           :                
-GND*                         : 67        :        :                   :         : 4         :                
+control                      : 67        : input  : 3.3-V LVTTL       :         : 4         : Y              
 GND*                         : 68        :        :                   :         : 4         :                
 GND*                         : 69        :        :                   :         : 4         :                
 GND*                         : 70        :        :                   :         : 4         :                

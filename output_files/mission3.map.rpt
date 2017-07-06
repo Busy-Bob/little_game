@@ -1,5 +1,5 @@
 Analysis & Synthesis report for mission3
-Thu Jul 06 01:32:04 2017
+Thu Jul 06 12:24:05 2017
 Quartus II 64-Bit Version 13.0.0 Build 156 04/24/2013 SJ Full Version
 
 
@@ -18,7 +18,7 @@ Quartus II 64-Bit Version 13.0.0 Build 156 04/24/2013 SJ Full Version
  10. Analysis & Synthesis IP Cores Summary
  11. State Machine - |mission3|spi_interface:inst|RxTxSTATE
  12. State Machine - |mission3|gravity_sensor_out:inst17|state
- 13. State Machine - |mission3|gravity_sensor_in:inst15|state
+ 13. State Machine - |mission3|gravity_sensor_in:inst21|state
  14. State Machine - |mission3|game_ctrl:inst14|state
  15. State Machine - |mission3|master_interface:inst4|previousSTATE
  16. State Machine - |mission3|master_interface:inst4|STATE
@@ -30,7 +30,7 @@ Quartus II 64-Bit Version 13.0.0 Build 156 04/24/2013 SJ Full Version
  22. Source assignments for rom256:inst3|altsyncram:altsyncram_component|altsyncram_ds71:auto_generated
  23. Source assignments for rom_things:inst1|altsyncram:altsyncram_component|altsyncram_3s71:auto_generated
  24. Parameter Settings for User Entity Instance: master_interface:inst4
- 25. Parameter Settings for User Entity Instance: gravity_sensor_in:inst15
+ 25. Parameter Settings for User Entity Instance: gravity_sensor_in:inst21
  26. Parameter Settings for User Entity Instance: gravity_sensor_out:inst17
  27. Parameter Settings for User Entity Instance: spi_interface:inst
  28. Parameter Settings for User Entity Instance: rom256:inst3|altsyncram:altsyncram_component
@@ -66,16 +66,16 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jul 06 01:32:03 2017       ;
+; Analysis & Synthesis Status        ; Successful - Thu Jul 06 12:24:05 2017       ;
 ; Quartus II 64-Bit Version          ; 13.0.0 Build 156 04/24/2013 SJ Full Version ;
 ; Revision Name                      ; mission3                                    ;
 ; Top-level Entity Name              ; mission3                                    ;
 ; Family                             ; Cyclone II                                  ;
-; Total logic elements               ; 2,166                                       ;
-;     Total combinational functions  ; 2,079                                       ;
-;     Dedicated logic registers      ; 555                                         ;
-; Total registers                    ; 555                                         ;
-; Total pins                         ; 38                                          ;
+; Total logic elements               ; 2,188                                       ;
+;     Total combinational functions  ; 2,103                                       ;
+;     Dedicated logic registers      ; 560                                         ;
+; Total registers                    ; 560                                         ;
+; Total pins                         ; 39                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 56,832                                      ;
 ; Embedded Multiplier 9-bit elements ; 2                                           ;
@@ -196,12 +196,13 @@ applicable agreement for further details.
 ; score.v                          ; yes             ; User Verilog HDL File                  ; C:/altera/13.0/EX_mission3/score.v                                   ;         ;
 ; keyboard.v                       ; yes             ; User Verilog HDL File                  ; C:/altera/13.0/EX_mission3/keyboard.v                                ;         ;
 ; game_ctrl.v                      ; yes             ; User Verilog HDL File                  ; C:/altera/13.0/EX_mission3/game_ctrl.v                               ;         ;
-; barrier_data.v                   ; yes             ; User Verilog HDL File                  ; C:/altera/13.0/EX_mission3/barrier_data.v                            ;         ;
 ; rom256.v                         ; yes             ; User Wizard-Generated File             ; C:/altera/13.0/EX_mission3/rom256.v                                  ;         ;
 ; mission3.bdf                     ; yes             ; User Block Diagram/Schematic File      ; C:/altera/13.0/EX_mission3/mission3.bdf                              ;         ;
 ; spi_interface.v                  ; yes             ; User Verilog HDL File                  ; C:/altera/13.0/EX_mission3/spi_interface.v                           ;         ;
 ; master_interface.v               ; yes             ; User Verilog HDL File                  ; C:/altera/13.0/EX_mission3/master_interface.v                        ;         ;
 ; rom_things.v                     ; yes             ; User Wizard-Generated File             ; C:/altera/13.0/EX_mission3/rom_things.v                              ;         ;
+; choose_mode.v                    ; yes             ; User Verilog HDL File                  ; C:/altera/13.0/EX_mission3/choose_mode.v                             ;         ;
+; barrier_data_random.v            ; yes             ; User Verilog HDL File                  ; C:/altera/13.0/EX_mission3/barrier_data_random.v                     ;         ;
 ; 3.txt                            ; yes             ; Auto-Found File                        ; C:/altera/13.0/EX_mission3/3.txt                                     ;         ;
 ; 2.txt                            ; yes             ; Auto-Found File                        ; C:/altera/13.0/EX_mission3/2.txt                                     ;         ;
 ; 1.txt                            ; yes             ; Auto-Found File                        ; C:/altera/13.0/EX_mission3/1.txt                                     ;         ;
@@ -234,29 +235,29 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 2,166 ;
+; Estimated Total logic elements              ; 2,188 ;
 ;                                             ;       ;
-; Total combinational functions               ; 2079  ;
+; Total combinational functions               ; 2103  ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 1050  ;
-;     -- 3 input functions                    ; 451   ;
-;     -- <=2 input functions                  ; 578   ;
+;     -- 4 input functions                    ; 1036  ;
+;     -- 3 input functions                    ; 452   ;
+;     -- <=2 input functions                  ; 615   ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 1647  ;
-;     -- arithmetic mode                      ; 432   ;
+;     -- normal mode                          ; 1641  ;
+;     -- arithmetic mode                      ; 462   ;
 ;                                             ;       ;
-; Total registers                             ; 555   ;
-;     -- Dedicated logic registers            ; 555   ;
+; Total registers                             ; 560   ;
+;     -- Dedicated logic registers            ; 560   ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
-; I/O pins                                    ; 38    ;
+; I/O pins                                    ; 39    ;
 ; Total memory bits                           ; 56832 ;
 ; Embedded Multiplier 9-bit elements          ; 2     ;
 ; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 532   ;
-; Total fan-out                               ; 8648  ;
-; Average fan-out                             ; 3.21  ;
+; Maximum fan-out                             ; 534   ;
+; Total fan-out                               ; 8742  ;
+; Average fan-out                             ; 3.20  ;
 +---------------------------------------------+-------+
 
 
@@ -265,12 +266,13 @@ applicable agreement for further details.
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                ; Library Name ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------+--------------+
-; |mission3                                 ; 2079 (0)          ; 555 (0)      ; 56832       ; 2            ; 0       ; 1         ; 38   ; 0            ; |mission3                                                                                          ;              ;
-;    |barrier_data:inst2|                   ; 39 (39)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|barrier_data:inst2                                                                       ;              ;
+; |mission3                                 ; 2103 (1)          ; 560 (0)      ; 56832       ; 2            ; 0       ; 1         ; 39   ; 0            ; |mission3                                                                                          ;              ;
+;    |barrier_data_random:inst20|           ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|barrier_data_random:inst20                                                               ;              ;
+;    |choose_mode:inst12|                   ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|choose_mode:inst12                                                                       ;              ;
 ;    |clk_div:inst18|                       ; 31 (31)           ; 18 (18)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|clk_div:inst18                                                                           ;              ;
-;    |game_ctrl:inst14|                     ; 178 (178)         ; 110 (110)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|game_ctrl:inst14                                                                         ;              ;
-;    |gravity_sensor_in:inst15|             ; 333 (333)         ; 50 (50)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|gravity_sensor_in:inst15                                                                 ;              ;
-;    |gravity_sensor_out:inst17|            ; 295 (295)         ; 176 (176)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|gravity_sensor_out:inst17                                                                ;              ;
+;    |game_ctrl:inst14|                     ; 227 (227)         ; 112 (112)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|game_ctrl:inst14                                                                         ;              ;
+;    |gravity_sensor_in:inst21|             ; 341 (341)         ; 53 (53)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|gravity_sensor_in:inst21                                                                 ;              ;
+;    |gravity_sensor_out:inst17|            ; 297 (297)         ; 176 (176)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|gravity_sensor_out:inst17                                                                ;              ;
 ;    |keyboard:inst9|                       ; 27 (27)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|keyboard:inst9                                                                           ;              ;
 ;    |master_interface:inst4|               ; 1053 (1053)       ; 110 (110)    ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |mission3|master_interface:inst4                                                                   ;              ;
 ;       |lpm_mult:Mult0|                    ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |mission3|master_interface:inst4|lpm_mult:Mult0                                                    ;              ;
@@ -282,7 +284,7 @@ applicable agreement for further details.
 ;    |rom_things:inst1|                     ; 0 (0)             ; 0 (0)        ; 7680        ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|rom_things:inst1                                                                         ;              ;
 ;       |altsyncram:altsyncram_component|   ; 0 (0)             ; 0 (0)        ; 7680        ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|rom_things:inst1|altsyncram:altsyncram_component                                         ;              ;
 ;          |altsyncram_3s71:auto_generated| ; 0 (0)             ; 0 (0)        ; 7680        ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|rom_things:inst1|altsyncram:altsyncram_component|altsyncram_3s71:auto_generated          ;              ;
-;    |score:inst6|                          ; 89 (89)           ; 49 (49)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|score:inst6                                                                              ;              ;
+;    |score:inst6|                          ; 88 (88)           ; 49 (49)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|score:inst6                                                                              ;              ;
 ;    |spi_interface:inst|                   ; 32 (32)           ; 21 (21)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |mission3|spi_interface:inst                                                                       ;              ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -353,7 +355,7 @@ Encoding Type:  One-Hot
 
 Encoding Type:  One-Hot
 +----------------------------------------------------------+
-; State Machine - |mission3|gravity_sensor_in:inst15|state ;
+; State Machine - |mission3|gravity_sensor_in:inst21|state ;
 +----------+----------+----------+----------+--------------+
 ; Name     ; state.y2 ; state.y1 ; state.x2 ; state.x1     ;
 +----------+----------+----------+----------+--------------+
@@ -416,13 +418,13 @@ Encoding Type:  One-Hot
 +----------------------------------------+-----------------------------------------------+
 ; gravity_sensor_out:inst17|beginad1[0]  ; Stuck at GND due to stuck port data_in        ;
 ; master_interface:inst4|PMODEN          ; Stuck at VCC due to stuck port data_in        ;
-; gravity_sensor_in:inst15|xvalue[0..5]  ; Lost fanout                                   ;
+; gravity_sensor_in:inst21|xvalue[0..5]  ; Lost fanout                                   ;
 ; gravity_sensor_out:inst17|xad2[0]      ; Stuck at GND due to stuck port data_in        ;
 ; gravity_sensor_out:inst17|yad2[0..3]   ; Stuck at GND due to stuck port data_in        ;
 ; gravity_sensor_out:inst17|state~2      ; Lost fanout                                   ;
 ; gravity_sensor_out:inst17|state~3      ; Lost fanout                                   ;
-; gravity_sensor_in:inst15|state~2       ; Lost fanout                                   ;
-; gravity_sensor_in:inst15|state~3       ; Lost fanout                                   ;
+; gravity_sensor_in:inst21|state~2       ; Lost fanout                                   ;
+; gravity_sensor_in:inst21|state~3       ; Lost fanout                                   ;
 ; game_ctrl:inst14|state~12              ; Lost fanout                                   ;
 ; game_ctrl:inst14|state~13              ; Lost fanout                                   ;
 ; game_ctrl:inst14|state~14              ; Lost fanout                                   ;
@@ -430,10 +432,10 @@ Encoding Type:  One-Hot
 ; master_interface:inst4|STATE~9         ; Lost fanout                                   ;
 ; master_interface:inst4|STATE~10        ; Lost fanout                                   ;
 ; master_interface:inst4|STATE~11        ; Lost fanout                                   ;
-; gravity_sensor_out:inst17|state.y2     ; Merged with gravity_sensor_in:inst15|state.y2 ;
-; gravity_sensor_out:inst17|state.y1     ; Merged with gravity_sensor_in:inst15|state.y1 ;
-; gravity_sensor_out:inst17|state.x2     ; Merged with gravity_sensor_in:inst15|state.x2 ;
-; gravity_sensor_out:inst17|state.x1     ; Merged with gravity_sensor_in:inst15|state.x1 ;
+; gravity_sensor_out:inst17|state.y2     ; Merged with gravity_sensor_in:inst21|state.y2 ;
+; gravity_sensor_out:inst17|state.y1     ; Merged with gravity_sensor_in:inst21|state.y1 ;
+; gravity_sensor_out:inst17|state.x2     ; Merged with gravity_sensor_in:inst21|state.x2 ;
+; gravity_sensor_out:inst17|state.x1     ; Merged with gravity_sensor_in:inst21|state.x1 ;
 ; Total Number of Removed Registers = 28 ;                                               ;
 +----------------------------------------+-----------------------------------------------+
 
@@ -453,12 +455,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 555   ;
-; Number of registers using Synchronous Clear  ; 108   ;
-; Number of registers using Synchronous Load   ; 17    ;
-; Number of registers using Asynchronous Clear ; 134   ;
+; Total registers                              ; 560   ;
+; Number of registers using Synchronous Clear  ; 104   ;
+; Number of registers using Synchronous Load   ; 48    ;
+; Number of registers using Asynchronous Clear ; 136   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 274   ;
+; Number of registers using Clock Enable       ; 277   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -469,17 +471,17 @@ Encoding Type:  One-Hot
 ; Inverted Register                       ; Fan out ;
 +-----------------------------------------+---------+
 ; game_ctrl:inst14|wudi_cnt[2]            ; 8       ;
-; game_ctrl:inst14|car_sta[1]             ; 1       ;
 ; game_ctrl:inst14|car_state[2]           ; 10      ;
-; gravity_sensor_in:inst15|fy1            ; 36      ;
+; game_ctrl:inst14|car_sta[1]             ; 1       ;
+; gravity_sensor_in:inst21|fy1            ; 34      ;
+; gravity_sensor_in:inst21|fy2            ; 34      ;
 ; gravity_sensor_out:inst17|beginad1[19]  ; 1       ;
 ; gravity_sensor_out:inst17|yad2[11]      ; 2       ;
 ; gravity_sensor_out:inst17|yad1[11]      ; 2       ;
 ; gravity_sensor_out:inst17|xad2[11]      ; 2       ;
 ; gravity_sensor_out:inst17|xad1[11]      ; 2       ;
-; gravity_sensor_in:inst15|fx2            ; 35      ;
-; gravity_sensor_in:inst15|fx1            ; 35      ;
-; gravity_sensor_in:inst15|fy2            ; 34      ;
+; gravity_sensor_in:inst21|fx2            ; 36      ;
+; gravity_sensor_in:inst21|fx1            ; 35      ;
 ; gravity_sensor_out:inst17|beginad1[17]  ; 1       ;
 ; gravity_sensor_out:inst17|yad2[9]       ; 1       ;
 ; gravity_sensor_out:inst17|yad1[9]       ; 1       ;
@@ -513,36 +515,37 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |mission3|game_ctrl:inst14|time_cnt[22]         ;
 ; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|xad1[6]     ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|xad2[7]     ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |mission3|gravity_sensor_out:inst17|yad1[7]     ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |mission3|gravity_sensor_out:inst17|yad2[7]     ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 3 LEs                ; 6 LEs                  ; Yes        ; |mission3|game_ctrl:inst14|barrier[7][2]        ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|xad2[6]     ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |mission3|gravity_sensor_out:inst17|yad1[13]    ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |mission3|gravity_sensor_out:inst17|yad2[2]     ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |mission3|game_ctrl:inst14|wudi_time[0]         ;
+; 4:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |mission3|game_ctrl:inst14|time_cnt[28]         ;
 ; 5:1                ; 21 bits   ; 63 LEs        ; 0 LEs                ; 63 LEs                 ; Yes        ; |mission3|game_ctrl:inst14|barrier[2][0]        ;
-; 5:1                ; 5 bits    ; 15 LEs        ; 0 LEs                ; 15 LEs                 ; Yes        ; |mission3|game_ctrl:inst14|displaydata[4]       ;
-; 5:1                ; 18 bits   ; 54 LEs        ; 18 LEs               ; 36 LEs                 ; Yes        ; |mission3|game_ctrl:inst14|displaydata[9]       ;
+; 5:1                ; 5 bits    ; 15 LEs        ; 0 LEs                ; 15 LEs                 ; Yes        ; |mission3|game_ctrl:inst14|displaydata[3]       ;
+; 5:1                ; 18 bits   ; 54 LEs        ; 18 LEs               ; 36 LEs                 ; Yes        ; |mission3|game_ctrl:inst14|displaydata[22]      ;
 ; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |mission3|spi_interface:inst|rx_count[1]        ;
-; 6:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |mission3|spi_interface:inst|shift_register[1]  ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 96 LEs               ; 64 LEs                 ; Yes        ; |mission3|gravity_sensor_in:inst15|k[2]         ;
+; 6:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |mission3|spi_interface:inst|shift_register[4]  ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 96 LEs               ; 64 LEs                 ; Yes        ; |mission3|gravity_sensor_in:inst21|k[24]        ;
+; 9:1                ; 3 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |mission3|game_ctrl:inst14|barrier[7][0]        ;
 ; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |mission3|game_ctrl:inst14|car_state[1]         ;
-; 11:1               ; 10 bits   ; 70 LEs        ; 20 LEs               ; 50 LEs                 ; Yes        ; |mission3|master_interface:inst4|car_address[0] ;
-; 12:1               ; 5 bits    ; 40 LEs        ; 5 LEs                ; 35 LEs                 ; Yes        ; |mission3|master_interface:inst4|row_add[3]     ;
-; 13:1               ; 2 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |mission3|game_ctrl:inst14|car_state[4]         ;
-; 15:1               ; 8 bits    ; 80 LEs        ; 8 LEs                ; 72 LEs                 ; Yes        ; |mission3|master_interface:inst4|now_draw[3]    ;
-; 16:1               ; 8 bits    ; 80 LEs        ; 32 LEs               ; 48 LEs                 ; Yes        ; |mission3|master_interface:inst4|address[12]    ;
+; 11:1               ; 10 bits   ; 70 LEs        ; 20 LEs               ; 50 LEs                 ; Yes        ; |mission3|master_interface:inst4|car_address[9] ;
+; 12:1               ; 5 bits    ; 40 LEs        ; 5 LEs                ; 35 LEs                 ; Yes        ; |mission3|master_interface:inst4|row_add[0]     ;
+; 13:1               ; 2 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |mission3|game_ctrl:inst14|car_state[0]         ;
+; 15:1               ; 8 bits    ; 80 LEs        ; 8 LEs                ; 72 LEs                 ; Yes        ; |mission3|master_interface:inst4|now_draw[0]    ;
+; 16:1               ; 8 bits    ; 80 LEs        ; 32 LEs               ; 48 LEs                 ; Yes        ; |mission3|master_interface:inst4|address[7]     ;
 ; 19:1               ; 8 bits    ; 96 LEs        ; 8 LEs                ; 88 LEs                 ; Yes        ; |mission3|master_interface:inst4|byte_count[6]  ;
-; 83:1               ; 5 bits    ; 275 LEs       ; 235 LEs              ; 40 LEs                 ; Yes        ; |mission3|master_interface:inst4|address[4]     ;
-; 154:1              ; 6 bits    ; 612 LEs       ; 564 LEs              ; 48 LEs                 ; Yes        ; |mission3|master_interface:inst4|send_data[6]   ;
-; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|xad1[3]     ;
-; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|xad2[9]     ;
+; 83:1               ; 5 bits    ; 275 LEs       ; 235 LEs              ; 40 LEs                 ; Yes        ; |mission3|master_interface:inst4|address[3]     ;
+; 154:1              ; 6 bits    ; 612 LEs       ; 564 LEs              ; 48 LEs                 ; Yes        ; |mission3|master_interface:inst4|send_data[2]   ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|xad1[8]     ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|xad2[8]     ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|yad1[4]     ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|yad2[8]     ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |mission3|gravity_sensor_out:inst17|yad2[9]     ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |mission3|score:inst6|Mux3                      ;
 ; 4:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |mission3|gravity_sensor_out:inst17|k           ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; No         ; |mission3|master_interface:inst4|slave_select   ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; No         ; |mission3|spi_interface:inst|Selector0          ;
-; 8:1                ; 3 bits    ; 15 LEs        ; 6 LEs                ; 9 LEs                  ; No         ; |mission3|master_interface:inst4|Selector35     ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; No         ; |mission3|spi_interface:inst|Selector1          ;
+; 8:1                ; 3 bits    ; 15 LEs        ; 6 LEs                ; 9 LEs                  ; No         ; |mission3|master_interface:inst4|Selector34     ;
 ; 16:1               ; 2 bits    ; 20 LEs        ; 8 LEs                ; 12 LEs                 ; No         ; |mission3|master_interface:inst4|Selector9      ;
 ; 18:1               ; 8 bits    ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; No         ; |mission3|game_ctrl:inst14|Selector32           ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------+
@@ -585,7 +588,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: gravity_sensor_in:inst15 ;
+; Parameter Settings for User Entity Instance: gravity_sensor_in:inst21 ;
 +----------------+-------+----------------------------------------------+
 ; Parameter Name ; Value ; Type                                         ;
 +----------------+-------+----------------------------------------------+
@@ -837,7 +840,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:15     ;
+; Top            ; 00:00:12     ;
 +----------------+--------------+
 
 
@@ -847,7 +850,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.0 Build 156 04/24/2013 SJ Full Version
-    Info: Processing started: Thu Jul 06 01:31:46 2017
+    Info: Processing started: Thu Jul 06 12:23:51 2017
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off mission3 -c mission3
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
 Info (12021): Found 1 design units, including 1 entities, in source file gravity_sensor_out.v
@@ -876,13 +879,18 @@ Info (12021): Found 1 design units, including 1 entities, in source file master_
     Info (12023): Found entity 1: master_interface
 Info (12021): Found 1 design units, including 1 entities, in source file rom_things.v
     Info (12023): Found entity 1: rom_things
+Info (12021): Found 1 design units, including 1 entities, in source file choose_mode.v
+    Info (12023): Found entity 1: choose_mode
+Info (12021): Found 1 design units, including 1 entities, in source file barrier_data_random.v
+    Info (12023): Found entity 1: barrier_data_random
 Info (12127): Elaborating entity "mission3" for the top level hierarchy
 Warning (275011): Block or symbol "spi_interface" of instance "inst" overlaps another block or symbol
+Warning (275011): Block or symbol "score" of instance "inst6" overlaps another block or symbol
 Info (12128): Elaborating entity "master_interface" for hierarchy "master_interface:inst4"
 Warning (10850): Verilog HDL warning at master_interface.v(149): number of words (45) in memory file does not match the number of elements in the address range [0:50]
-Warning (10230): Verilog HDL assignment warning at master_interface.v(416): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at master_interface.v(436): truncated value with size 32 to match size of target (10)
-Warning (10230): Verilog HDL assignment warning at master_interface.v(458): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at master_interface.v(417): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at master_interface.v(437): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at master_interface.v(459): truncated value with size 32 to match size of target (8)
 Warning (10030): Net "SETUP_GYRO.data_a" at master_interface.v(127) has no driver or initial value, using a default initial value '0'
 Warning (10030): Net "SETUP_GYRO.waddr_a" at master_interface.v(127) has no driver or initial value, using a default initial value '0'
 Warning (10030): Net "RUN_BEGIN.data_a" at master_interface.v(129) has no driver or initial value, using a default initial value '0'
@@ -890,20 +898,12 @@ Warning (10030): Net "RUN_BEGIN.waddr_a" at master_interface.v(129) has no drive
 Warning (10030): Net "SETUP_GYRO.we_a" at master_interface.v(127) has no driver or initial value, using a default initial value '0'
 Warning (10030): Net "RUN_BEGIN.we_a" at master_interface.v(129) has no driver or initial value, using a default initial value '0'
 Info (12128): Elaborating entity "game_ctrl" for hierarchy "game_ctrl:inst14"
-Warning (10036): Verilog HDL or VHDL warning at game_ctrl.v(20): object "speed_cnt" assigned a value but never read
-Info (12128): Elaborating entity "gravity_sensor_in" for hierarchy "gravity_sensor_in:inst15"
+Info (12128): Elaborating entity "choose_mode" for hierarchy "choose_mode:inst12"
+Info (12128): Elaborating entity "keyboard" for hierarchy "keyboard:inst9"
+Info (12128): Elaborating entity "gravity_sensor_in" for hierarchy "gravity_sensor_in:inst21"
 Info (12128): Elaborating entity "clk_div" for hierarchy "clk_div:inst18"
 Info (12128): Elaborating entity "gravity_sensor_out" for hierarchy "gravity_sensor_out:inst17"
-Info (12128): Elaborating entity "keyboard" for hierarchy "keyboard:inst9"
-Info (12128): Elaborating entity "barrier_data" for hierarchy "barrier_data:inst2"
-Warning (10199): Verilog HDL Case Statement warning at barrier_data.v(11): case item expression never matches the case expression
-Warning (10199): Verilog HDL Case Statement warning at barrier_data.v(13): case item expression never matches the case expression
-Warning (10199): Verilog HDL Case Statement warning at barrier_data.v(15): case item expression never matches the case expression
-Warning (10199): Verilog HDL Case Statement warning at barrier_data.v(17): case item expression never matches the case expression
-Warning (10272): Verilog HDL Case Statement warning at barrier_data.v(13): case item expression covers a value already covered by a previous case item
-Warning (10272): Verilog HDL Case Statement warning at barrier_data.v(15): case item expression covers a value already covered by a previous case item
-Warning (10272): Verilog HDL Case Statement warning at barrier_data.v(17): case item expression covers a value already covered by a previous case item
-Warning (10272): Verilog HDL Case Statement warning at barrier_data.v(21): case item expression covers a value already covered by a previous case item
+Info (12128): Elaborating entity "barrier_data_random" for hierarchy "barrier_data_random:inst20"
 Info (12128): Elaborating entity "spi_interface" for hierarchy "spi_interface:inst"
 Info (12128): Elaborating entity "rom256" for hierarchy "rom256:inst3"
 Info (12128): Elaborating entity "altsyncram" for hierarchy "rom256:inst3|altsyncram:altsyncram_component"
@@ -983,17 +983,17 @@ Info (17049): 17 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/altera/13.0/EX_mission3/output_files/mission3.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 2262 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 8 input pins
+Info (21057): Implemented 2287 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 9 input pins
     Info (21059): Implemented 30 output pins
-    Info (21061): Implemented 2198 logic cells
+    Info (21061): Implemented 2222 logic cells
     Info (21064): Implemented 24 RAM segments
     Info (21062): Implemented 2 DSP elements
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 27 warnings
-    Info: Peak virtual memory: 478 megabytes
-    Info: Processing ended: Thu Jul 06 01:32:04 2017
-    Info: Elapsed time: 00:00:18
-    Info: Total CPU time (on all processors): 00:00:17
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 19 warnings
+    Info: Peak virtual memory: 479 megabytes
+    Info: Processing ended: Thu Jul 06 12:24:05 2017
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:14
 
 
 +------------------------------------------+

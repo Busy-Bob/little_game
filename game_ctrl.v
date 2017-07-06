@@ -4,7 +4,7 @@ module game_ctrl (
 	input [2:0] barrier_in,
 	
 	output [22:0] disdata,
-	output reg gameover, dis, //speed,
+	output reg gameover, dis,
 	output reg [7:0] cnt,
 	output reg [6:0] wudidis
 	
@@ -16,19 +16,9 @@ reg [1:0] car_mov;
 reg [4:0] car_state;
 reg [2:0] car_sta;
 reg [2:0] wudi_cnt;
+reg [1:0] wudi_time;
 reg [31:0] time_cnt;
-reg [2:0] speed_cnt;
 reg [2:0] barrier [7:0];
-
-//always @ (posedge clk) begin
-//	if (speedup)
-//		speed <= 1;
-//	else if (speed_cnt == 3'd7)
-//		speed <= 0;
-//	else
-//		speed <= 1;
-//end
-
 
 always @ (posedge clk or posedge rst) begin
 	if (rst)
@@ -39,7 +29,7 @@ always @ (posedge clk or posedge rst) begin
 		cnt <= 0;
 		time_cnt <= 0;
 		wudi_cnt <= 3'd4;
-		speed_cnt <= 0;
+		wudi_time <= 2'd0;
 		dis <= 0;
 		gameover <= 0;
 		barrier[0] <= 0;
@@ -131,11 +121,14 @@ always @ (posedge clk or posedge rst) begin
 			end
 			4:	//判断是否死亡
 			begin
+				if (time_cnt == 32'd4250020)
+					if (wudi && wudi_cnt != 3'd0) 
+						wudi_time <= 2'd3;
 				if (time_cnt == 32'd4250024)
-					if (wudi && wudi_cnt != 3'd0)
+					if (wudi_time != 2'd0 && wudi_cnt != 3'd0)
 					begin
 						gameover <= 0;
-						wudi_cnt <= wudi_cnt - 3'd1;
+						wudi_time <= wudi_time - 2'd1;
 					end
 					else
 					begin
@@ -145,6 +138,9 @@ always @ (posedge clk or posedge rst) begin
 							state <= 7;
 						end
 					end
+				if (time_cnt == 32'd4250028)
+					if (wudi_time == 2'd1)
+						wudi_cnt <= wudi_cnt - 3'd1;
 				if (time_cnt == 32'd4250032)
 					state <= 5;
 			end
@@ -152,7 +148,7 @@ always @ (posedge clk or posedge rst) begin
 			begin
 				if (speed) 
 				begin
-					time_cnt <= time_cnt + 32'd1;
+					time_cnt <= time_cnt + 32'd2;
 				end
 				if (time_cnt == 32'd6250048 || time_cnt == 32'd6250049)
 					displaydata <= {barrier[6], barrier[5], barrier[4], barrier[3], barrier[2], barrier[1], car_state};
@@ -167,7 +163,7 @@ always @ (posedge clk or posedge rst) begin
 			begin
 				if (speed)
 				begin
-					time_cnt <= time_cnt + 32'd1;
+					time_cnt <= time_cnt + 32'd2;
 				end
 				if (time_cnt == 32'd12500000 || time_cnt == 32'd12500001)
 				begin
@@ -219,7 +215,6 @@ assign disdata[3] = displaydata[19];
 assign disdata[2] = displaydata[20];
 assign disdata[1] = displaydata[21];
 assign disdata[0] = displaydata[22];
-
 
 
 endmodule

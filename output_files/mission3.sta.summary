@@ -3,72 +3,72 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow Model Setup 'clk'
-Slack : -25.922
-TNS   : -5394.547
+Slack : -27.206
+TNS   : -5817.564
 
 Type  : Slow Model Setup 'gravity_sensor_out:inst17|sclk'
-Slack : -12.097
-TNS   : -483.967
+Slack : -11.550
+TNS   : -493.698
 
 Type  : Slow Model Setup 'clk_div:inst18|clk_out'
-Slack : -0.228
-TNS   : -0.503
+Slack : -0.346
+TNS   : -0.833
 
 Type  : Slow Model Hold 'clk'
-Slack : -2.600
-TNS   : -79.590
+Slack : -2.617
+TNS   : -63.421
 
 Type  : Slow Model Hold 'gravity_sensor_out:inst17|sclk'
 Slack : 0.499
 TNS   : 0.000
 
 Type  : Slow Model Hold 'clk_div:inst18|clk_out'
-Slack : 0.763
+Slack : 0.785
 TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'clk'
 Slack : -2.277
-TNS   : -1484.453
+TNS   : -1487.421
 
 Type  : Slow Model Minimum Pulse Width 'gravity_sensor_out:inst17|sclk'
 Slack : -0.742
-TNS   : -63.812
+TNS   : -68.264
 
 Type  : Slow Model Minimum Pulse Width 'clk_div:inst18|clk_out'
 Slack : -0.742
 TNS   : -5.936
 
 Type  : Fast Model Setup 'clk'
-Slack : -6.100
-TNS   : -1267.425
+Slack : -6.434
+TNS   : -1426.142
 
 Type  : Fast Model Setup 'gravity_sensor_out:inst17|sclk'
-Slack : -3.299
-TNS   : -130.885
+Slack : -3.136
+TNS   : -132.678
 
 Type  : Fast Model Setup 'clk_div:inst18|clk_out'
-Slack : 0.524
+Slack : 0.519
 TNS   : 0.000
 
 Type  : Fast Model Hold 'clk'
-Slack : -1.405
-TNS   : -122.541
+Slack : -1.421
+TNS   : -109.423
 
 Type  : Fast Model Hold 'gravity_sensor_out:inst17|sclk'
 Slack : 0.215
 TNS   : 0.000
 
 Type  : Fast Model Hold 'clk_div:inst18|clk_out'
-Slack : 0.268
+Slack : 0.281
 TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'clk'
 Slack : -1.423
-TNS   : -964.740
+TNS   : -966.740
 
 Type  : Fast Model Minimum Pulse Width 'gravity_sensor_out:inst17|sclk'
 Slack : -0.500
-TNS   : -43.000
+TNS   : -46.000
 
 Type  : Fast Model Minimum Pulse Width 'clk_div:inst18|clk_out'
 Slack : -0.500

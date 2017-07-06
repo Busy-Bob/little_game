@@ -358,6 +358,7 @@ module master_interface(
 												show_flag <= 1;
 												slave_select <= 1'b1;
 												byte_count <= 0;
+												begin_transmission <= 1'b0;
 											end
 										end
 									end

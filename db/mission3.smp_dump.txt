@@ -12,7 +12,7 @@ state.x2 0 0 1 1
 state.y1 0 1 0 1 
 state.y2 1 0 0 1 
 
-State Machine - |mission3|gravity_sensor_in:inst15|state
+State Machine - |mission3|gravity_sensor_in:inst21|state
 Name state.y2 state.y1 state.x2 state.x1 
 state.x1 0 0 0 0 
 state.x2 0 0 1 1 
